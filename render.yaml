@@ -1,0 +1,22 @@
+services:
+  # Backend API
+  - type: web
+    name: lolzin-api
+    env: node
+    buildCommand: npm install
+    startCommand: node server/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+
+  # Frontend
+  - type: web
+    name: lolzin-web
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://lolzin-api.onrender.com
